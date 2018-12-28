@@ -22,6 +22,11 @@ RUN echo "Install cpanm"            && \
     rm -f index.html                && \
     echo "DONE"
 
+RUN apt-get update && apt-get upgrade -y && \
+    apt-get install -y libssl-dev zlib1g-dev openssl             && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata  && \
+    echo "DONE"
+
 COPY cpanfile cpanfile
 RUN cpanm . --installdeps
 
