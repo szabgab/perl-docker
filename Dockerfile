@@ -1,7 +1,9 @@
 FROM ubuntu:18.10
-RUN apt-get update                                  && \
-    apt-get upgrade -y                              && \
-    apt-get install -y build-essential less wget    && \
+RUN apt-get update                                            && \
+    apt-get upgrade -y                                        && \
+    apt-get install -y build-essential less wget              && \
+    apt-get install -y libssl-dev zlib1g-dev openssl          && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata  && \
     echo "DONE"
 
 RUN echo "Install Perl" && \
@@ -22,10 +24,6 @@ RUN echo "Install cpanm"            && \
     rm -f index.html                && \
     echo "DONE"
 
-RUN apt-get update && apt-get upgrade -y && \
-    apt-get install -y libssl-dev zlib1g-dev openssl             && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata  && \
-    echo "DONE"
 
 COPY cpanfile cpanfile
 RUN cpanm . --installdeps
