@@ -36,4 +36,9 @@ RUN cpanm . --installdeps
 RUN chmod -R a+rx /root/perl5
 RUN chmod  a+rx /root
 RUN adduser --disabled-password --gecos "Foo Bar" foobar
+
+COPY cpanfile-perl-maven cpanfile
+RUN cpanm --notest Business::PayPal
+RUN cpanm . --installdeps
+
 WORKDIR /opt
