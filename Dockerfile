@@ -33,4 +33,7 @@ RUN cpanm --notest Net::SSLeay               && \
     echo "DONE"
 RUN cpanm . --installdeps
 
+RUN chmod -R a+rx /root/perl5
+RUN chmod  a+rx /root
+RUN adduser --disabled-password --gecos "Foo Bar" foobar
 WORKDIR /opt
