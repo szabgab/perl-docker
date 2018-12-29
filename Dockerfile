@@ -3,6 +3,7 @@ RUN apt-get update                                            && \
     apt-get upgrade -y                                        && \
     apt-get install -y build-essential less wget              && \
     apt-get install -y libssl-dev zlib1g-dev openssl          && \
+    apt-get install -y libexpat1-dev libxml++2.6-dev          && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata  && \
     echo "DONE"
 
@@ -26,5 +27,10 @@ RUN echo "Install cpanm"            && \
 
 
 COPY cpanfile cpanfile
+RUN cpanm --notest Net::SSLeay               && \
+    cpanm --force Graphics::ColorNames::WWW  && \
+    cpanm --force DateTime::Format::CLDR     && \
+    echo "DONE"
 RUN cpanm . --installdeps
 
+WORKDIR /opt
